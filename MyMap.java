@@ -105,7 +105,7 @@ public class MyMap<K extends	Comparable<K>,V>
 	public void display()
 	{
 		System.out.print("{");
-		Stack nodes = new Stack<>();
+		MyStack<Node> nodes = new MyStack<Node>();
 		Node<K,V> current = this.mapRoot;
 
 		while (!nodes.isEmpty() || current != null) 
