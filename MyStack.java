@@ -33,7 +33,7 @@ public class MyStack<T>
 			head=newNode;
 		}
 	}
-	public Object pop()
+	public T pop()
 	{
 		if(head==null)
 		{

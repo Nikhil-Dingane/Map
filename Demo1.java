@@ -1,6 +1,6 @@
-import java.util.Scanner;
+import java.util.*;
 
-class Demo
+class Demo1
 {
 	public static void main(String arg[])
 	{
@@ -9,7 +9,7 @@ class Demo
 		System.out.println("Enter number of elemetns to be inserted:");
 		int no=sobj.nextInt();
 		
-		MyMap<Integer,String> obj=new MyMap<Integer,String>();
+		TreeMap<Integer,String> obj=new TreeMap<Integer,String>();
 		
 		long endTime;
 		long startTime;
@@ -18,7 +18,7 @@ class Demo
 		 
 		for(int i=1;i<no;i++)
 		{
-			obj.insert(i,"Krishagni");
+			obj.put(i,"Krishagni");
 		}
 		
 		 endTime=System.nanoTime();

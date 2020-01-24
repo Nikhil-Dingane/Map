@@ -1,60 +1,58 @@
-class MyMap<K extends Comparable<K>,V>
+class RedBlackTree<T extends Comparable<T>>
 {
-	//These are the flags for the color characterstic of MapNode class
+	//These are the flags for the color characterstic of TreeNode class
 	private final boolean RED=true;
 	private final boolean BLACK=false;
 	
 	//This is the roort of  tree
-	private MapNode rootNode;
+	private TreeNode rootNode;
 	
-	class MapNode
+	class TreeNode
 	{
-		K key;
-		V value;
+		T data;
 		boolean color;
 		
-		MapNode leftChild;
-		MapNode rightChild;
-		MapNode parent;
+		TreeNode leftChild;
+		TreeNode rightChild;
+		TreeNode parent;
 		
-		// Parameterised constructor of MapNode class
-		public MapNode(K key,V value,boolean color)
+		// Parameterised constructor of TreeNode class
+		public TreeNode(T data,boolean color)
 		{
-			this.key=key;
+			this.data=data;
 			this.color=color;
 			this.leftChild=null;
 			this.rightChild=null;
 			this.parent=null;
-			this.value=value;
 		}
 	}
 	
 	
-	//Default constructor of MyMap class
-	public MyMap()
+	//Default constructor of RedBlackTree class
+	public RedBlackTree()
 	{
 		this.rootNode=null;
 	}
 	
 	
 	//Insert function to insert node in tree
-	public void insert(K key,V value)
+	public void insert(T data)
 	{
 		// If tree is empty
 		if(this.rootNode==null)
 		{
-			this.rootNode=new MapNode(key,value,BLACK);
+			this.rootNode=new TreeNode(data,BLACK);
 			return;
 		}
 		
-		MapNode temp=this.rootNode;
-		MapNode newChild=new MapNode(key,value,RED);
+		TreeNode temp=this.rootNode;
+		TreeNode newChild=new TreeNode(data,RED);
 		int ret;
 		
 		// Insert node in tree as like Binary Search Tree
 		while(true)
 		{
-			ret=key.compareTo(temp.key);
+			ret=data.compareTo(temp.data);
 			if(ret>0)
 			{
 				if(temp.rightChild==null)
@@ -77,8 +75,7 @@ class MyMap<K extends Comparable<K>,V>
 			}
 			else if(ret==0)
 			{
-				temp.value=newChild.value;
-				return;
+				break;
 			}
 		}
 		
@@ -89,7 +86,7 @@ class MyMap<K extends Comparable<K>,V>
 		}
 		
 		// Uncle node of newly inserted node
-		MapNode uncle;
+		TreeNode uncle;
 		
 		// This is the loop for fixing the tree which was unbalanced by the newly inserted node
 		while((newChild.parent!=rootNode)&&(newChild.parent.color==RED))
@@ -257,7 +254,7 @@ class MyMap<K extends Comparable<K>,V>
 	
 	
 	//Helper function for left rotation
-	public MapNode leftRotate(MapNode newChild)
+	public TreeNode leftRotate(TreeNode newChild)
 	{
 		
 		newChild.parent.parent.leftChild=newChild;
@@ -270,7 +267,7 @@ class MyMap<K extends Comparable<K>,V>
 	}
 	
 	//Helper function for right roation
-	public MapNode rightRotate(MapNode newChild)
+	public TreeNode rightRotate(TreeNode newChild)
 	{
 		newChild.parent.parent.rightChild=newChild;
 		newChild.rightChild=newChild.parent;
@@ -285,8 +282,8 @@ class MyMap<K extends Comparable<K>,V>
 	public void display()
 	{
 		System.out.print("{");
-		MyStack<MapNode> nodes = new MyStack<MapNode>();
-		MapNode current = this.rootNode;
+		MyStack<TreeNode> nodes = new MyStack<TreeNode>();
+		TreeNode current = this.rootNode;
 		int i=0;
 		while (!nodes.isEmpty() || current != null) 
 		{
@@ -299,8 +296,8 @@ class MyMap<K extends Comparable<K>,V>
 			}
 			else 
 			{
-				MapNode node = nodes.pop();
-				System.out.print(node.key+"="+node.value+" \t");
+				TreeNode node = nodes.pop();
+				System.out.print(node.data+" \t");
 				current = node.rightChild;
 			}
 			if(i==5)
